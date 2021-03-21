@@ -13,8 +13,6 @@ def main():
   if response is response:
     print("Dio timeout")
 
-#wlp5s0
-
   ipr = IPRoute()
 
   print(ipr.get_addr(family=2))
