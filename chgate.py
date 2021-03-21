@@ -9,7 +9,7 @@ def main():
 #    ping('192.168.0.1', verbose=True, size=248, count=3)
 #    ping('www.google.com', verbose=True, size=248, count=3)
 
-  response = ping("192.168.0.33", size=248, count=1)
+  response = ping("192.168.0.1", size=248, count=1)
   if response is response:
     print("Dio timeout")
 
