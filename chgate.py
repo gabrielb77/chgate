@@ -13,6 +13,9 @@ def main():
   if response is response:
     print("Dio timeout")
 
+  print(response.rtt)
+
+
   ipr = IPRoute()
 
   print(ipr.get_addr(family=2))
