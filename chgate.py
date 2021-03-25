@@ -6,30 +6,141 @@ from ping3 import ping
 import ipaddress
 from time import sleep
 import ipcalc
+import json
+import socket
+
 
 def main():
   NetDict = {
-    "dc4-sn1":{
-      "subnet":"10.32.80.0/24",
-      "dgw":"10.32.80.1"
+    "dc4":{
+      "1":{
+        "subnet":"10.32.80.0/24",
+        "dgw":"10.32.80.1"
+      },
     },
-    "cs-sn1":{
-      "subnet":"10.255.15.192/27",
-      "dgw":"10.255.15.193"
+    "cs":{
+      "1":{
+        "subnet":"10.255.15.192/27",
+        "dgw":"10.255.15.193"
+      },
+      "2":{
+        "subnet":"10.255.15.224/27",
+        "dgw":"10.255.15.225"
+      }
     },
-    "cs-sn2":{
-      "subnet":"10.255.15.224/27",
-      "dgw":"10.255.15.225"
+    "eqx":{
+      "1":{
+        "subnet":"10.255.15.128/27",
+        "dgw":"10.255.15.129"
+      },
+      "2":{
+        "subnet":"10.255.15.160/27",
+        "dgw":"10.255.15.161"
+      }
     },
-    "eqx-sn1":{
-      "subnet":"10.255.15.128/27",
-      "dgw":"10.255.15.129"
-    },
-    "eqx-sn2":{
-      "subnet":"10.255.15.160/27",
-      "dgw":"10.255.15.161"
+    "casa":{
+      "1":{
+        "subnet":"192.168.0.0/24",
+        "dgw":"192.168.0.1"
+      }
     }
   }
+
+  HostConfig = {
+    "eqx-vm-jmp-01":{
+      "ip_ori":"10.255.15.135",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"a",
+      "gw_alt":"10.255.15.225"
+    },
+    "eqx-vm-dlg-01":{
+      "ip_ori":"10.255.15.136",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.167",
+      "gw_alt":"10.255.15.225"
+    },
+    "eqx-vm-flw-01":{
+      "ip_ori":"10.255.15.137",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.168",
+      "gw_alt":"10.255.15.225"
+    },
+    "eqx-vm-jmp-02":{
+      "ip_ori":"10.255.15.165",
+      "gw_ori":"10.255.15.225",
+      "ip_alt":"10.255.15.138",
+      "gw_alt":"10.255.15.129"
+    },
+    "eqx-vm-tucu-02":{
+      "ip_ori":"10.255.15.166",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.131",
+      "gw_alt":"10.255.15.225"
+    },
+    "cs-vm-jmp-01":{
+      "ip_ori":"10.255.15.195",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.229",
+      "gw_alt":"10.255.15.225"
+    },
+    "cs-vm-dlg-01":{
+      "ip_ori":"10.255.15.196",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.230",
+      "gw_alt":"10.255.15.225"
+    },
+    "cs-vm-flw-01":{
+      "ip_ori":"10.255.15.197",
+      "gw_ori":"10.255.15.129",
+      "ip_alt":"10.255.15.231",
+      "gw_alt":"10.255.15.225"
+    },
+    "cs-vm-jmp-02":{
+      "ip_ori":"10.255.15.227",
+      "gw_ori":"10.255.15.225",
+      "ip_alt":"10.255.15.198",
+      "gw_alt":"10.255.15.193"
+    },
+    "cs-vm-tucu-02":{
+      "ip_ori":"10.255.15.228",
+      "gw_ori":"10.255.15.225",
+      "ip_alt":"10.255.15.198",
+      "gw_alt":"10.255.15.193"
+    },
+  }
+
+dc4-vm-jmp-01	dc4-serv-01	DC4	10.32.80.30	
+dc4-vm-dlg-01	dc4-serv-01	DC4	10.32.80.31	
+dc4-vm-flw-01	dc4-serv-01	DC4	10.32.80.32	
+dc4-vm-jmp-02	dc4-serv-02	DC4	10.32.80.33	
+dc4-vm-jmp-03	dc4-serv-03	DC4	10.32.80.34	
+dc4-vm-tucu-01	dc4-serv-01	DC4	10.32.80.35	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  print(json.dumps(NetDict, sort_keys=False, indent=2))
 
 #  ipr = IPRoute()
 #  print(ipr.get_addr(family=2))
@@ -42,6 +153,7 @@ def main():
   Device = "wlp5s0"
   ipr = IPRoute()
   SubnetMatch = False
+  MyHostname = socket.gethostname()
 #  print(ipr.get_addr(family=2))
 #  print(ipr.get_links())
 #  Links = ipr.get_links()
@@ -113,8 +225,9 @@ def main():
   print("VALID IP: " + str(ValidIP))
   print("VALID pref: " + str(ValidPrefix))
 #  MySubnet = str(ValidIP) + "/" + str(ValidPrefix)
-  MySubnet = ipcalc.Network(str(ValidIP) + "/" + str(ValidPrefix))
-  MySubnet = MySubnet.network()
+  MySubnet = str(ipcalc.Network(str(ValidIP) + "/" + str(ValidPrefix)).network())
+  MyPrefix = str(ValidPrefix)
+
 
 #  ValidIP = None
 #  while not ValidIP:
@@ -135,23 +248,39 @@ def main():
 # determinar el DC
 
   for dclist in NetDict:
-    Subnet = NetDict[dclist]["subnet"]
-    DGW = NetDict[dclist]["dgw"]
-    print("######: " + str(MySubnet) + "  ########  " + Subnet)
+    print(dclist)
+    for snid in NetDict[dclist]:
+      print(snid)
+      Subnet = NetDict[dclist][snid]["subnet"]
+      DGW = NetDict[dclist][snid]["dgw"]
+      print("######: " + MySubnet + "/" + MyPrefix + "  ########  " + Subnet + " Ping a: " + DGW)
 
-    if str(MySubnet) in Subnet:
-      print("Estoy en dclist")
-      MyDC = dclist
-      SubnetMatch = True
+      if MySubnet in Subnet:
+        MyDC = dclist
+        SubnetMatch = True
 
   try:
-    print(MyDC)
+    print("Estoy en: " + MyDC)
   except:
-    print("No se encontro DC para subnet " + str(MySubnet))
-#  print(NetDict)
+    print("No se encontro DC para subnet " + MySubnet + "/" + MyPrefix)
 
 
 # probar los gateways de ese DC
+
+  for TestGw in NetDict[MyDC]:
+    dgw = NetDict[MyDC][TestGw]["dgw"]
+    print("Hace ping a: " + NetDict[MyDC][TestGw]["dgw"])
+    if ping(dgw):
+      print("Todo ok, no se hace nada")
+      print(dgw + " alive")
+    else:
+      print(dgw + " muerto")
+      print("setear ip alternativa")
+
+
+
+
+
 # configurar segun gateway que responda
 
   dgw = "192.168.0.1"
