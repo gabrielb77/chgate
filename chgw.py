@@ -6,7 +6,6 @@ from ping3 import ping
 import ipaddress
 from time import sleep
 import ipcalc
-import json
 import socket
 
 
