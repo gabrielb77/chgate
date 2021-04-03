@@ -1,0 +1,8 @@
+fping==0.0.1a2
+ipcalc==1.99.0
+netaddr==0.8.0
+ping3==2.7.0
+pkg-resources==0.0.0
+pyroute2==0.5.14
+pythonping==1.0.16
+six==1.15.0

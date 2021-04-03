@@ -211,7 +211,6 @@ def main():
           PrefixActual = str(ValidPrefix)
           SubnetActual = str(ipcalc.Network(str(ValidIP) + "/" + str(ValidPrefix)).network())
 
-
           ## Si el gateway que voy a configurar es el mismo que tengo, no hago nada
           if DefGWActual != CfgGateway:
             print("Eliminar config actual: " + IpAddrActual + "/" + PrefixActual + " via: " + DefGWActual)
