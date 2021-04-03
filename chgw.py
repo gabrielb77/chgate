@@ -218,7 +218,6 @@ def main():
             print("Eliminar config actual: " + IpAddrActual + "/" + PrefixActual + " via: " + DefGWActual)
             print("Reemplazar por :" + CfgIpAddr + "/" + CfgNetmask + " via: " + CfgGateway)
 
-            ipdb = IPDB()
             ## Saco ip vieja, pongo ip nueva
             try:
               IfIndex = ipdb.interfaces[ipdb.routes['default']['oif']].index
@@ -231,15 +230,11 @@ def main():
             except:
               print("Algo salio mal configurando la ip")
 
-            ipr.close()
-            ipr = IPRoute()
-
-            ipdb.release()
-            ipdb = IPDB()
             ## Agrego default gateway nuevo
             ipdb.routes.add({'dst': 'default','gateway': CfgGateway}).commit()
 
             ipdb.release()
+            ipr.close()
 
 
 if __name__ == "__main__":
