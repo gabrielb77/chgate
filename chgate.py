@@ -50,71 +50,195 @@ def main():
     "eqx-vm-jmp-01":{
       "ip_ori":"10.255.15.135",
       "gw_ori":"10.255.15.129",
-      "ip_alt":"a",
-      "gw_alt":"10.255.15.225"
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.163",
+      "gw_alt":"10.255.15.161",
+      "prefix_alt":"27"
     },
     "eqx-vm-dlg-01":{
       "ip_ori":"10.255.15.136",
       "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.167",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.161",
+      "prefix_alt":"27"
     },
     "eqx-vm-flw-01":{
       "ip_ori":"10.255.15.137",
       "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.168",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.161",
+      "prefix_alt":"27"
     },
     "eqx-vm-jmp-02":{
       "ip_ori":"10.255.15.165",
-      "gw_ori":"10.255.15.225",
+      "gw_ori":"10.255.15.161",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.138",
-      "gw_alt":"10.255.15.129"
+      "gw_alt":"10.255.15.129",
+      "prefix_alt":"27"
     },
     "eqx-vm-tucu-02":{
       "ip_ori":"10.255.15.166",
-      "gw_ori":"10.255.15.129",
+      "gw_ori":"10.255.15.161",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.131",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.129",
+      "prefix_alt":"27"
     },
     "cs-vm-jmp-01":{
       "ip_ori":"10.255.15.195",
       "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.229",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
     },
     "cs-vm-dlg-01":{
       "ip_ori":"10.255.15.196",
-      "gw_ori":"10.255.15.129",
+      "gw_ori":"10.255.15.193",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.230",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
     },
     "cs-vm-flw-01":{
       "ip_ori":"10.255.15.197",
-      "gw_ori":"10.255.15.129",
+      "gw_ori":"10.255.15.193",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.231",
-      "gw_alt":"10.255.15.225"
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
     },
     "cs-vm-jmp-02":{
       "ip_ori":"10.255.15.227",
       "gw_ori":"10.255.15.225",
+      "prefix_ori":"27",
       "ip_alt":"10.255.15.198",
-      "gw_alt":"10.255.15.193"
+      "gw_alt":"10.255.15.193",
+      "prefix_alt":"27"
     },
     "cs-vm-tucu-02":{
       "ip_ori":"10.255.15.228",
       "gw_ori":"10.255.15.225",
-      "ip_alt":"10.255.15.198",
-      "gw_alt":"10.255.15.193"
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.199",
+      "gw_alt":"10.255.15.193",
+      "prefix_alt":"27"
     },
+    "gbnotebook":{
+      "ip_ori":"192.168.0.30",
+      "gw_ori":"192.168.0.1",
+      "prefix_ori":"24",
+      "ip_alt":"192.168.0.80",
+      "gw_alt":"192.168.0.102",
+      "prefix_alt":"24"
+    }
   }
 
-dc4-vm-jmp-01	dc4-serv-01	DC4	10.32.80.30	
-dc4-vm-dlg-01	dc4-serv-01	DC4	10.32.80.31	
-dc4-vm-flw-01	dc4-serv-01	DC4	10.32.80.32	
-dc4-vm-jmp-02	dc4-serv-02	DC4	10.32.80.33	
-dc4-vm-jmp-03	dc4-serv-03	DC4	10.32.80.34	
-dc4-vm-tucu-01	dc4-serv-01	DC4	10.32.80.35	
+
+
+  HostConfig2 = {
+    "eqx":{
+      "eqx-vm-jmp-01":{
+        "pri":{
+          "ip":"10.255.15.135",
+          "gw":"10.255.15.129",
+          "prefix":"27"
+        },
+        "sec":{
+          "ip":"10.255.15.163",
+          "gw":"10.255.15.161",
+          "prefix":"27"
+        }
+      },
+    },
+    "eqx-vm-dlg-01":{
+      "ip_ori":"10.255.15.136",
+      "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.167",
+      "gw_alt":"10.255.15.161",
+      "prefix_alt":"27"
+    },
+    "eqx-vm-flw-01":{
+      "ip_ori":"10.255.15.137",
+      "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.168",
+      "gw_alt":"10.255.15.161",
+      "prefix_alt":"27"
+    },
+    "eqx-vm-jmp-02":{
+      "ip_ori":"10.255.15.165",
+      "gw_ori":"10.255.15.161",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.138",
+      "gw_alt":"10.255.15.129",
+      "prefix_alt":"27"
+    },
+    "eqx-vm-tucu-02":{
+      "ip_ori":"10.255.15.166",
+      "gw_ori":"10.255.15.161",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.131",
+      "gw_alt":"10.255.15.129",
+      "prefix_alt":"27"
+    },
+    "cs-vm-jmp-01":{
+      "ip_ori":"10.255.15.195",
+      "gw_ori":"10.255.15.129",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.229",
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
+    },
+    "cs-vm-dlg-01":{
+      "ip_ori":"10.255.15.196",
+      "gw_ori":"10.255.15.193",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.230",
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
+    },
+    "cs-vm-flw-01":{
+      "ip_ori":"10.255.15.197",
+      "gw_ori":"10.255.15.193",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.231",
+      "gw_alt":"10.255.15.225",
+      "prefix_alt":"27"
+    },
+    "cs-vm-jmp-02":{
+      "ip_ori":"10.255.15.227",
+      "gw_ori":"10.255.15.225",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.198",
+      "gw_alt":"10.255.15.193",
+      "prefix_alt":"27"
+    },
+    "cs-vm-tucu-02":{
+      "ip_ori":"10.255.15.228",
+      "gw_ori":"10.255.15.225",
+      "prefix_ori":"27",
+      "ip_alt":"10.255.15.199",
+      "gw_alt":"10.255.15.193",
+      "prefix_alt":"27"
+    },
+    "gbnotebook":{
+      "pri":{
+        "ip":"192.168.0.30",
+        "gw":"192.168.0.1",
+        "prefix":"24"
+      },
+      "sec":{
+        "ip":"192.168.0.80",
+        "gw":"192.168.0.102",
+        "prefix":"24"
+      }
+    }
+  }
 
 
 
@@ -128,20 +252,8 @@ dc4-vm-tucu-01	dc4-serv-01	DC4	10.32.80.35
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  print(json.dumps(NetDict, sort_keys=False, indent=2))
-
+#  print(json.dumps(NetDict, sort_keys=False, indent=2))
+  print(json.dumps(HostConfig, sort_keys=False, indent=2))
 #  ipr = IPRoute()
 #  print(ipr.get_addr(family=2))
 #  print(ipr.get_default_routes(family=0, table=254))
@@ -182,7 +294,15 @@ dc4-vm-tucu-01	dc4-serv-01	DC4	10.32.80.35
   ipdb = IPDB()
 #  print(ipdb.routes['default']['oif'])
 #  Testall = ipdb.interfaces[ipdb.routes['default']['oif']]
-#  ifname = ipdb.interfaces[ipdb.routes['default']['oif']].ifname
+  index = ipdb.interfaces[ipdb.routes['default']['oif']].index
+#  index = ipr.link_lookup(ifname='wlp5s0')[0]
+  print(index)
+  print(ipdb.interfaces[ipdb.routes['default']['oif']])
+  try:
+    ipr.addr('add', index, address='192.168.0.123', mask=24)
+  except:
+    print("Algo salio mal")
+
 #  Test2 = ipdb.interfaces[ipdb.routes['default']['oif']].address
 #  ip1,ip2 = ipdb.interfaces[ipdb.routes['default']['oif']].ipaddr
   IpTuple = ipdb.interfaces[ipdb.routes['default']['oif']].ipaddr
@@ -270,12 +390,44 @@ dc4-vm-tucu-01	dc4-serv-01	DC4	10.32.80.35
   for TestGw in NetDict[MyDC]:
     dgw = NetDict[MyDC][TestGw]["dgw"]
     print("Hace ping a: " + NetDict[MyDC][TestGw]["dgw"])
-    if ping(dgw):
+    if ping(dgw, size=248, timeout=3):
       print("Todo ok, no se hace nada")
       print(dgw + " alive")
     else:
       print(dgw + " muerto")
       print("setear ip alternativa")
+      for Lala in HostConfig:
+        print("------------------------------------------------------------------")
+        print(Lala)
+        print(MyHostname)
+        if MyHostname in Lala:
+          print("Estoy en config")
+          IpAlt = HostConfig[Lala]["ip_alt"]
+          PrefixAlt = HostConfig[Lala]["prefix_alt"]
+          CIDRAlt = HostConfig[Lala]["ip_alt"] + "/" + HostConfig[Lala]["prefix_alt"]
+          GatewayAlt = HostConfig[Lala]["gw_alt"]
+          GatewayOri = HostConfig[Lala]["gw_ori"]
+          print("IP ORI: " + HostConfig[Lala]["ip_ori"])
+          print("GW ORI: " + HostConfig[Lala]["gw_ori"])
+          print("IP ALT: " + HostConfig[Lala]["ip_alt"])
+          print("GW ALT: " + HostConfig[Lala]["gw_alt"])
+          print("CIDR ALT: " + CIDRAlt)
+          ipdb.interfaces[ipdb.routes['default']['oif']].add_ip(CIDRAlt)
+          try:
+            ipr.route("del", dst="0.0.0.0", gateway=GatewayOri)
+          except:
+            print("No se pudo borrar gateway" + GatewayOri)
+          try:
+            ipdb.routes.add({'dst': 'default','gateway': GatewayAlt}).commit()
+          except:
+            print("No se pudo agregar gw" + GatewayAlt)
+          try:
+            index = ipdb.interfaces[ipdb.routes['default']['oif']].index
+            ipr.addr('add', index, address='192.168.0.123', mask=24)
+          except:
+            print("Algo salio mal")
+        else:
+          print("No estoy en config")
 
 
 
