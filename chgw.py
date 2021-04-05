@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
 
+#
+#requirements.txt 
+#fping==0.0.1a2
+#ipcalc==1.99.0
+#netaddr==0.8.0
+#ping3==2.7.0
+#pkg-resources==0.0.0
+#pyroute2==0.5.14
+#pythonping==1.0.16
+#six==1.15.0
+
 from pyroute2 import IPRoute
 from pyroute2 import IPDB
+from pyroute2 import NDB
 from ping3 import ping
 import ipaddress
 from time import sleep
 import ipcalc
 import socket
+import logging
 
 
 def main():
@@ -170,6 +183,7 @@ def main():
 
   ipr = IPRoute()
   ipdb = IPDB()
+  ndb = NDB()
   MyHostname = socket.gethostname()
 
   ## Pruebo si tengo default gw configurado
@@ -177,6 +191,7 @@ def main():
     RouteList = ipr.get_default_routes(family=0, table=254)[0]["attrs"]
   except:
     print("No tengo default gw. Me voy.")
+    logging.error("No tengo default gw. Me voy.")
     ipr.close()
     quit()
 
@@ -188,8 +203,10 @@ def main():
   if ping(DefGWActual, size=248, timeout=3):
     print(DefGWActual + " alive")
     print("Todo ok, no se hace nada")
+    logging.debug("Todo ok, no se hace nada")
   else:
     print("El default gateway configurado " + DefGWActual + " no responde")
+    logging.debug("El default gateway configurado no responde")
     for MyHostConfig in HostStaticConfig:
       if MyHostConfig in MyHostname:
         for TestLoop in HostStaticConfig[MyHostname]:
@@ -198,6 +215,14 @@ def main():
           CfgIpAddr = HostStaticConfig[MyHostname][TestLoop]["ip"]
           CfgNetmask = HostStaticConfig[MyHostname][TestLoop]["prefix"]
           IpTuple = ipdb.interfaces[ipdb.routes['default']['oif']].ipaddr
+
+
+          print(ipr.get_default_routes())
+#          print(ndb.routes['default'])
+#          print(ndb.interfaces[ndb.routes['default']['oif']].ipaddr)
+#          IpTuple2 = ndb.interfaces[ndb.routes['default']['oif']].ipaddr
+
+#          print(IpTuple2)
           ## Busco direccion ip configurada y valido string
           for val in IpTuple:
             for val2 in val:
@@ -236,4 +261,6 @@ def main():
 
 
 if __name__ == "__main__":
-  main()
+  while True:
+    main()
+    sleep(5)
