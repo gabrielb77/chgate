@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-#
 #requirements.txt 
 #fping==0.0.1a2
 #ipcalc==1.99.0
