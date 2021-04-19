@@ -184,13 +184,15 @@ def main():
   ipdb = IPDB()
   ndb = NDB()
   MyHostname = socket.gethostname()
+#  logging.basicConfig(level=logging.INFO)
+  logging.basicConfig(filename='/var/log/chgw.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
   ## Pruebo si tengo default gw configurado
   try:
     RouteList = ipr.get_default_routes(family=0, table=254)[0]["attrs"]
   except:
     print("No tengo default gw. Me voy.")
-    logging.error("No tengo default gw. Me voy.")
+    logging.error('No tengo default gw. Me voy.')
     ipr.close()
     quit()
 
@@ -202,10 +204,10 @@ def main():
   if ping(DefGWActual, size=248, timeout=3):
     print(DefGWActual + " alive")
     print("Todo ok, no se hace nada")
-    logging.debug("Todo ok, no se hace nada")
+    logging.info("Todo ok, no se hace nada")
   else:
     print("El default gateway configurado " + DefGWActual + " no responde")
-    logging.debug("El default gateway configurado no responde")
+    logging.warning("El default gateway configurado no responde")
     for MyHostConfig in HostStaticConfig:
       if MyHostConfig in MyHostname:
         for TestLoop in HostStaticConfig[MyHostname]:
